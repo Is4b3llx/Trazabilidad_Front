@@ -22,7 +22,8 @@ export default function LoteList() {
 					</tr>
 				</thead>
 				<tbody>
-					{lotes.map((l) => (
+	{[...lotes].sort((a, b) => b.IdLote - a.IdLote).map((l) => (
+ 
 						<tr key={l.IdLote}>
 							<td>{l.IdLote}</td>
 							<td>{l.Nombre}</td>

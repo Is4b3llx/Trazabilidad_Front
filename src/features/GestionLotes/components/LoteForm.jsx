@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useCreateLote from "../hooks/useCreateLote";
-import useMateriasPrimas from "../../materiaPrima/hooks/useMateriasPrimas";
+import useMateriasPrimas from "../../MateriaPrima/hooks/useMateriasPrimas";
 
 export default function LoteForm() {
 	const [form, setForm] = useState({
@@ -11,8 +11,13 @@ export default function LoteForm() {
 	});
 
 	const { handleCreate, loading, error, success } = useCreateLote();
-	const { data: materiasPrimas, loading: loadingMaterias } =
-		useMateriasPrimas();
+	const { data: materiasPrimas, loading: loadingMaterias } = useMateriasPrimas();
+
+	// Establecer la fecha de creación al día de hoy cuando se carga el componente
+	useEffect(() => {
+		const today = new Date().toISOString().split('T')[0]; // Obtener la fecha en formato YYYY-MM-DD
+		setForm((prevForm) => ({ ...prevForm, FechaCreacion: today }));
+	}, []); // Esto solo se ejecuta una vez cuando el componente se monta
 
 	const onChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });

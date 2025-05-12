@@ -23,15 +23,18 @@ export default function MateriaPrimaList() {
 					</tr>
 				</thead>
 				<tbody>
-					{materias.map((m) => (
-						<tr key={m.IdMateriaPrima}>
-							<td>{m.IdMateriaPrima}</td>
-							<td>{m.Nombre}</td>
-							<td>{new Date(m.FechaRecepcion).toLocaleDateString()}</td>
-							<td>{m.Proveedor || "—"}</td>
-							<td className="right">{m.Cantidad}</td>
-						</tr>
-					))}
+					{/* Ordenar por IdMateriaPrima de manera decreciente */}
+					{[...materias]
+						.sort((a, b) => b.IdMateriaPrima - a.IdMateriaPrima)
+						.map((m) => (
+							<tr key={m.IdMateriaPrima}>
+								<td>{m.IdMateriaPrima}</td>
+								<td>{m.Nombre}</td>
+								<td>{new Date(m.FechaRecepcion).toLocaleDateString()}</td>
+								<td>{m.Proveedor || "—"}</td>
+								<td className="right">{m.Cantidad}</td>
+							</tr>
+						))}
 				</tbody>
 			</table>
 		</div>

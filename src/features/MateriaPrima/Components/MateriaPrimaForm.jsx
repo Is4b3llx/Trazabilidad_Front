@@ -8,7 +8,7 @@ import useCreateMateriaPrima from "../hooks/useCreateMateriaPrima";
 export default function MateriaPrimaForm() {
 	const [form, setForm] = useState({
 		Nombre: "",
-		FechaRecepcion: "",
+		FechaRecepcion: new Date().toISOString().split("T")[0], // Establece la fecha de hoy por defecto
 		Proveedor: "",
 		Cantidad: "",
 	});
@@ -22,7 +22,7 @@ export default function MateriaPrimaForm() {
 		e.preventDefault();
 		await handleCreate({ ...form, Cantidad: parseFloat(form.Cantidad) });
 		if (!error) {
-			setForm({ Nombre: "", FechaRecepcion: "", Proveedor: "", Cantidad: "" });
+			setForm({ Nombre: "", FechaRecepcion: new Date().toISOString().split("T")[0], Proveedor: "", Cantidad: "" });
 		}
 	};
 
